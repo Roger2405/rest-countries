@@ -1,0 +1,32 @@
+.country {
+    background-color: var(--elements);
+    box-shadow: var(--shadow);
+    width: 75%;
+    margin: 1rem auto 3rem;
+    border-radius: .5rem;
+    overflow: hidden;
+
+
+    &__image {
+        width: 100%;
+        aspect-ratio: 5/3;
+        object-fit: cover;
+    }
+
+    &__info {
+        padding: 0 1.5rem;
+
+        &--name {
+            margin: 1rem 0;
+            font-size: 1.25rem;
+        }
+
+        &--details {
+            padding-bottom: 3rem;
+
+            & b {
+                font-weight: 600;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--elements);
+    box-shadow: var(--shadow);
+    font-weight: 800;
+
+
+    &__title {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    &__modeSwitcher {
+        font-size: .75rem;
+        color: inherit;
+        background-color: unset;
+        border: none;
+    }
+
+}

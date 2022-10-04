@@ -1,0 +1,17 @@
+.selectFilter {
+    background-color: var(--elements);
+    border: none;
+    border-radius: .25rem;
+    box-shadow: var(--shadow);
+    color: var(--text);
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    width: 60%;
+    height: auto;
+
+
+    &__option {
+        padding: .25rem 0;
+        font-weight: 600;
+    }
+}
