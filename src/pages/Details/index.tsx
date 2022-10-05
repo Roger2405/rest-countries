@@ -15,23 +15,39 @@ export default function Details() {
     const navigate = useNavigate();
 
     const [country, setCountry] = useState<any>();
+    const [borderCountriesName, setBorderCountriesName] = useState<any[]>([]);
+    let langList: any = [];
 
     useEffect(() => {
-        Axios.get(`https://restcountries.com/v3.1/name/${name}`)
+        Axios.get(`https://restcountries.com/v2/name/${name}`)
             .then((res) => {
                 let response = res.data;
-
-                setCountry(response);
-
+                let country = response[0];
+                setCountry(country);
+                requestAndSetBorderCountryNames(country.borders);
             })
             .catch(err => {
                 console.log(err)
-            })
-
+            });
     }, []);
 
-    console.log(country ? country[0] : 'o objeto é nulo');
-    //const teste = country ? JSON.stringify(country[0]['name']['nativeName'][0]['common']) : '';
+
+    async function requestAndSetBorderCountryNames(borderCountries: any[]) {
+        let arrNames = [];
+        for (let i = 0; i < borderCountries.length; i++) {
+            const borderCountry = borderCountries[i];
+            const name = await Axios.get(`https://restcountries.com/v2/alpha/${borderCountry}`)
+                .then(res => {
+                    return res.data.name;
+                }).catch(err => {
+                    console.log(err);
+                })
+            arrNames.push(name);
+        }
+        setBorderCountriesName(arrNames);
+
+    }
+
     return (
         <div className="details">
             <button className="buttonBack" onClick={() => navigate(-1)}>
@@ -40,26 +56,43 @@ export default function Details() {
             </button>
 
             {country ?
-
                 <div className="content">
-                    <img className="flag" src={country[0]['flags']['svg']} alt="" />
+
+                    <img className="flag" src={country.flags.svg} alt="" />
                     <div className="info">
-                        <h1 className="name">{name}</h1>
+                        <h1 className="name">{country.name}</h1>
                         <div className="div-descriptions">
                             <div className="description">
-                                <p className="description__label">Native Name:{ }</p>
-                                <p className="description__label">Population:{country[0]['population']}</p>
-                                <p className="description__label">Region:{country[0]['region']}</p>
-                                <p className="description__label">Sub Region:{country[0]['subregion']}</p>
-                                <p className="description__label">Capital:{country[0]['capital']}</p>
+                                <p className="description__label"><b>Native Name: </b>{country.nativeName}</p>
+                                <p className="description__label"><b>Population: </b>{country.population}</p>
+                                <p className="description__label"><b>Region: </b>{country.region}</p>
+                                <p className="description__label"><b>Sub Region: </b>{country.subregion}</p>
+                                <p className="description__label"><b>Capital: </b>{country.capital}</p>
                             </div>
                             <div className="description">
-                                <p className="description__label">Top Level Domain:{country[0]['tld']}</p>
-                                <p className="description__label">Currencies:{ }</p>
-                                <p className="description__label">Languages:</p>
+                                <p className="description__label"><b>Top Level Domain: </b>{country.topLevelDomain}</p>
+                                <p className="description__label"><b>Currencies: </b>{country.currencies[0].name}</p>
+                                {
+                                    country.languages.map((lang: any) => {
+                                        langList.push(lang.name)
+                                    })
+                                }
+                                <p className="description__label"><b>Languages: </b>{langList.join(', ')}</p>
+
                             </div>
                         </div>
-                        <h3>Border Countries</h3>
+                        <div className="borderCountries">
+                            <h3 className="borderCountries__title">Border Countries: </h3>
+                            <div className="borderCountries__tags">
+                                {
+                                    borderCountriesName.map(countryName => {
+                                        return <div className="borderCountries__tags--country">{countryName}</div>
+                                    })
+                                }
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -68,7 +101,7 @@ export default function Details() {
                 :
                 <Loading />
             }
-        </div>
+        </div >
 
     )
 }
