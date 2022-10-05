@@ -1,0 +1,66 @@
+.details {
+    padding: 0 1.75rem;
+    height: 100%;
+
+
+    .buttonBack {
+        padding: .5rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        border: none;
+        background-color: var(--elements);
+        box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.25);
+        margin: 3rem 0;
+    }
+
+    .content {
+
+
+        .flag {
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+
+        .info {
+            .name {
+                font-size: 1.75rem;
+                margin: 1rem 0;
+            }
+
+            .description {
+                margin-bottom: 2rem;
+
+                &__label {
+                    font-weight: 600;
+                    line-height: 2.25rem;
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width:768px) {
+    .content {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 6rem;
+        width: 100%;
+
+        .flag {
+            flex-basis: 50%;
+            overflow: auto;
+        }
+
+        .info {
+            flex-basis: 50%;
+
+            .div-descriptions {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+    }
+}

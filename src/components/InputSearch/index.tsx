@@ -1,5 +1,6 @@
 import './styles.scss';
 import { MagnifyingGlass } from 'phosphor-react';
+import React from 'react';
 
 interface Props {
     setSearch: React.Dispatch<React.SetStateAction<string>>

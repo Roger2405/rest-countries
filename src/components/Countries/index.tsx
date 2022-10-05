@@ -1,6 +1,7 @@
 import './styles.scss';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     countries: any[]
@@ -8,10 +9,15 @@ interface Props {
 
 export default function Countries({ countries }: Props) {
 
+    const navigate = useNavigate();
+
+    function goToDetails(name: string) {
+        navigate(`/details/${name}`)
+    }
 
     return (
 
-        <div>
+        < div className='countries' >
             {
                 countries.map(country => {
                     const name = country['name']['common'];
@@ -21,7 +27,7 @@ export default function Countries({ countries }: Props) {
                     const capital = country['capital'];
 
                     return (
-                        <div className='country' key={countries.indexOf(country)} onClick={() => console.log(country)}>
+                        <div className='country' key={countries.indexOf(country)} onClick={() => goToDetails(name)}>
                             <img className='country__image' src={image} alt="" />
                             <div className='country__info'>
                                 <h2 className='country__info--name'>{name}</h2>
@@ -45,6 +51,6 @@ export default function Countries({ countries }: Props) {
 
             }
 
-        </div>)
+        </div >)
 
 }
