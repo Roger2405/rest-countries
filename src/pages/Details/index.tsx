@@ -7,6 +7,9 @@ import { ArrowLeft } from 'phosphor-react';
 import './styles.scss';
 import '../../styles/base.scss';
 import Loading from "../../components/Loading";
+import ButtonBack from "../../components/ButtonBack";
+import CountryTag from "../../components/CountryTag";
+import BorderCountries from "../../components/BorderCountries";
 
 
 export default function Details() {
@@ -49,12 +52,16 @@ export default function Details() {
 
     }
 
+    function goBack() {
+        navigate(-1);
+        setTimeout(() => {
+            window.location.reload();
+        }, 250);
+    }
+
     return (
         <div className="details">
-            <button className="buttonBack" onClick={() => navigate(-1)}>
-                <ArrowLeft />
-                Back
-            </button>
+            <ButtonBack onClick={() => goBack()} />
 
             <div className="content">
                 {country ?
@@ -83,24 +90,7 @@ export default function Details() {
 
                                 </div>
                             </div>
-                            <div className="borderCountries">
-                                <h3 className="borderCountries__title">Border Countries: </h3>
-                                {
-                                    borderCountriesName.length ?
-                                        <div className="borderCountries__tags">
-                                            {
-                                                borderCountriesName.map(countryName => {
-                                                    return <div className="borderCountries__tags--country">{countryName}</div>
-                                                }
-                                                )
-                                            }
-
-                                        </div>
-                                        :
-                                        <Loading />
-                                }
-
-                            </div>
+                            <BorderCountries borderCountriesName={borderCountriesName} />
 
                         </div>
                     </>

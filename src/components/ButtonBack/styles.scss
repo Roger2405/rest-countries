@@ -1,0 +1,28 @@
+.buttonBack {
+    align-items: center;
+
+    background-color: var(--elements);
+
+    border: none;
+    border-radius: .25rem;
+    box-shadow: var(--hard-shadow);
+
+    cursor: pointer;
+
+    color: var(--text);
+    display: flex;
+
+    font-weight: 600;
+
+    gap: .5rem;
+    margin: 3rem 0;
+    padding: .5rem 2rem;
+
+    transition: .25s;
+
+    &:hover {
+        box-shadow: var(--shadow);
+        transform: scale(1.05);
+        transition: .25s;
+    }
+}
