@@ -24,10 +24,24 @@
     }
 
     .content {
+        display: flex;
+        flex-direction: column;
 
+        @media screen and (min-width:768px) {
+            & {
+                flex-direction: row;
+
+                .flag {
+                    overflow: hidden;
+                }
+
+                .info {}
+            }
+        }
 
         .flag {
             margin: 1.5rem 0;
+
             width: 100%;
             aspect-ratio: 7/5;
         }
