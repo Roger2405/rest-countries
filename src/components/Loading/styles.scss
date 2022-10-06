@@ -1,8 +1,13 @@
 .loading {
-    height: 400px;
+    min-height: 1.5rem;
+    height: 100%;
+    width: 100%;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+
+
 
     span {
         background-color: var(--text);
@@ -30,7 +35,9 @@
     :nth-child(3) {
         animation-delay: .375s;
     }
+
 }
+
 
 @keyframes loadingSpan {
     50% {

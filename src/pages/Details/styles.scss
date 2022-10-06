@@ -1,6 +1,5 @@
 .details {
     padding: 0 1.75rem;
-    height: 100%;
 
     @media screen and (min-width:768px) {
         & {
@@ -26,6 +25,7 @@
     .content {
         display: flex;
         flex-direction: column;
+        height: 50vh;
 
         @media screen and (min-width:768px) {
             & {
@@ -33,9 +33,9 @@
 
                 .flag {
                     overflow: hidden;
+                    object-fit: contain;
                 }
 
-                .info {}
             }
         }
 
@@ -92,7 +92,6 @@
                     &--country {
                         background-color: var(--elements);
                         box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.125);
-                        min-width: 100px;
                         padding: .375rem 1rem;
                         font-size: .75rem;
                         border-radius: .125rem;
@@ -100,9 +99,14 @@
                         font-weight: 300;
                     }
                 }
+
+                .loading {
+                    justify-content: flex-start;
+                }
             }
 
         }
+
     }
 }
 

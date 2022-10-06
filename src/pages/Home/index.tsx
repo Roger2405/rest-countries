@@ -29,21 +29,22 @@ export default function Home() {
 
   return (
     <div className='home'>
-      <main>
-        <div className='filterBar'>
-          <InputSearch setSearch={setSearch} />
-          <InputFilter setFilter={setFilter} />
+      <div className='filterBar'>
+        <InputSearch setSearch={setSearch} />
+        <InputFilter setFilter={setFilter} />
 
-        </div>
-        {countries.length !== 0 ?
+      </div>
+      {countries.length !== 0 ?
+        <div>
           <Countries countries={(countries.filter(i => {
             return i['region'].toLowerCase().includes(filter) && i['name']['common'].toLowerCase().includes(search.toLowerCase());
           }))} />
-          :
-          <Loading />
 
-        }
-      </main>
+        </div>
+        :
+        <Loading />
+
+      }
 
     </div>
   )

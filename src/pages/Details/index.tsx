@@ -33,7 +33,7 @@ export default function Details() {
 
 
     async function requestAndSetBorderCountryNames(borderCountries: any[]) {
-        let arrNames = [];
+        let arrNames: any[] = [];
         for (let i = 0; i < borderCountries.length; i++) {
             const borderCountry = borderCountries[i];
             const name = await Axios.get(`https://restcountries.com/v2/alpha/${borderCountry}`)
@@ -46,6 +46,7 @@ export default function Details() {
         }
         setBorderCountriesName(arrNames);
 
+
     }
 
     return (
@@ -55,52 +56,58 @@ export default function Details() {
                 Back
             </button>
 
-            {country ?
-                <div className="content">
+            <div className="content">
+                {country ?
+                    <>
 
-                    <img className="flag" src={country.flags.svg} alt="" />
-                    <div className="info">
-                        <h1 className="name">{country.name}</h1>
-                        <div className="div-descriptions">
-                            <div className="description">
-                                <p className="description__label"><b>Native Name: </b>{country.nativeName}</p>
-                                <p className="description__label"><b>Population: </b>{country.population}</p>
-                                <p className="description__label"><b>Region: </b>{country.region}</p>
-                                <p className="description__label"><b>Sub Region: </b>{country.subregion}</p>
-                                <p className="description__label"><b>Capital: </b>{country.capital}</p>
+                        <img className="flag" src={country.flags.svg} alt="" />
+                        <div className="info">
+                            <h1 className="name">{country.name}</h1>
+                            <div className="div-descriptions">
+                                <div className="description">
+                                    <p className="description__label"><b>Native Name: </b>{country.nativeName}</p>
+                                    <p className="description__label"><b>Population: </b>{country.population}</p>
+                                    <p className="description__label"><b>Region: </b>{country.region}</p>
+                                    <p className="description__label"><b>Sub Region: </b>{country.subregion}</p>
+                                    <p className="description__label"><b>Capital: </b>{country.capital}</p>
+                                </div>
+                                <div className="description">
+                                    <p className="description__label"><b>Top Level Domain: </b>{country.topLevelDomain}</p>
+                                    <p className="description__label"><b>Currencies: </b>{country.currencies[0].name}</p>
+                                    {
+                                        country.languages.map((lang: any) => {
+                                            langList.push(lang.name)
+                                        })
+                                    }
+                                    <p className="description__label"><b>Languages: </b>{langList.join(', ')}</p>
+
+                                </div>
                             </div>
-                            <div className="description">
-                                <p className="description__label"><b>Top Level Domain: </b>{country.topLevelDomain}</p>
-                                <p className="description__label"><b>Currencies: </b>{country.currencies[0].name}</p>
+                            <div className="borderCountries">
+                                <h3 className="borderCountries__title">Border Countries: </h3>
                                 {
-                                    country.languages.map((lang: any) => {
-                                        langList.push(lang.name)
-                                    })
-                                }
-                                <p className="description__label"><b>Languages: </b>{langList.join(', ')}</p>
+                                    borderCountriesName.length ?
+                                        <div className="borderCountries__tags">
+                                            {
+                                                borderCountriesName.map(countryName => {
+                                                    return <div className="borderCountries__tags--country">{countryName}</div>
+                                                }
+                                                )
+                                            }
 
-                            </div>
-                        </div>
-                        <div className="borderCountries">
-                            <h3 className="borderCountries__title">Border Countries: </h3>
-                            <div className="borderCountries__tags">
-                                {
-                                    borderCountriesName.map(countryName => {
-                                        return <div className="borderCountries__tags--country">{countryName}</div>
-                                    })
+                                        </div>
+                                        :
+                                        <Loading />
                                 }
 
                             </div>
 
                         </div>
-
-                    </div>
-
-
-                </div >
-                :
-                <Loading />
-            }
+                    </>
+                    :
+                    <Loading />
+                }
+            </div >
         </div >
 
     )
