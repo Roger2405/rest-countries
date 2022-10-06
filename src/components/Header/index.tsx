@@ -9,7 +9,13 @@ export default function Header() {
 
     useEffect(() => {
         const html = document.querySelector('html');
-        html?.classList.toggle('dark-mode');
+        if (darkMode) {
+            html?.classList.add('dark-mode');
+        }
+        else {
+            html?.classList.remove('dark-mode');
+
+        }
     }, [darkMode]);
 
 
